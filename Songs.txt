@@ -1,0 +1,26 @@
+SongName,Genre,SingerName,Runtime
+Bohemian Rhapsody,Rock,Queen,5:55
+Shape of You,Pop,Ed Sheeran,3:53
+Billie Jean,Pop,Michael Jackson,4:54
+Smells Like Teen Spirit,Grunge,Nirvana,5:01
+Rolling in the Deep,Soul,Adele,3:48
+Hotel California,Rock,Eagles,6:30
+Blinding Lights,Synthpop,The Weeknd,3:20
+Sweet Child O' Mine,Rock,Guns N' Roses,5:56
+Bad Guy,Pop,Billie Eilish,3:14
+Africa,Soft Rock,Toto,4:55
+Wonderwall,Britpop,Oasis,4:18
+Someone Like You,Soul,Adele,4:45
+Uptown Funk,Funk,Mark Ronson,4:30
+Shape of You,Pop,Ed Sheeran,3:53
+Imagine,Piano Rock,John Lennon,3:03
+Hey Jude,Rock,The Beatles,7:11
+Lose Yourself,Hip Hop,Eminem,5:26
+Hallelujah,Folk Rock,Jeff Buckley,6:53
+Purple Rain,Rock,Prince,8:41
+Thriller,Pop,Michael Jackson,5:57
+Respect,R&B,Aretha Franklin,2:27
+Don't Stop Believin',Rock,Journey,4:11
+Halo,Pop,Beyonce,4:21
+Fly Me to the Moon,Jazz,Frank Sinatra,2:27
+Enter Sandman,Metal,Metallica,5:31

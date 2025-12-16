@@ -1,0 +1,8 @@
+Username,Password,Name,Playlists
+alicemusic,pass123,Alice,Rock Classics|Sad Hour
+bobby_beats,secure456,Bob,Pop Anthems
+charlie_retro,90skid,Charlie,90s Rewind
+driver_dave,vroom789,Dave,Driving Tunes
+test_admin,admin,Tester,Duplicate Test
+empty_user,newpass,NewUser,
+user123,Givemetheykey123,User123,

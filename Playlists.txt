@@ -1,0 +1,7 @@
+PlaylistName,Songs,CreatorName,TotalRuntime
+Rock Classics,Bohemian Rhapsody|Hotel California|Sweet Child O' Mine|Purple Rain,alicemusic,26:02
+Pop Anthems,Shape of You|Billie Jean|Bad Guy|Thriller|Halo,Bob,22:19
+Sad Hour,Rolling in the Deep|Someone Like You|Hallelujah|Wonderwall,Alice,19:44
+90s Rewind,Smells Like Teen Spirit|Enter Sandman|Wonderwall|Uptown Funk,Charlie,19:20
+Driving Tunes,Africa|Don't Stop Believin'|Fly Me to the Moon|Take on Me,Dave,11:33
+Duplicate Test,Shape of You|Shape of You|Bohemian Rhapsody,Tester,13:41
