@@ -15,6 +15,8 @@ class Database:
         self.playlist = []
 
     def load_user_data(self):
+        # This function is responsible for loading all the user data from the Users.txt file
+        # This function will create a new user object and append it to the users array
         with open("Assignment_2/Users.txt","r") as file:
             lines = file.readlines()
             
@@ -37,6 +39,8 @@ class Database:
                 
     
     def load_song_data(self):
+        # This function is responsible for loading all the song data from the Songs.txt file
+        # This function will create a new song object and append it to the songs array
         with open("Assignment_2/Songs.txt","r") as file:
             lines = file.readlines()
             
@@ -52,6 +56,8 @@ class Database:
                 
     
     def load_playlist_data(self):
+        # This function is responsible for loading all the playlist data from the Playlists.txt file
+        # This function will create a new playlist object and append it to the playlists array
         with open("Assignment_2/Playlists.txt","r") as file:
             lines = file.readlines()
             for line in lines[1:]:
@@ -66,6 +72,10 @@ class Database:
     
     
     def authenticate(self):
+        # This function is responsible for authenticating the user
+        # The user will have 3 attempts to login
+        # If the user fails to login after 3 attempts, the program will exit
+        # If the user logs in successfully, the user object will be returned
         while self.login_attempts < 3:
             username = input("Enter username: ")
             password = input("Enter password: ")
@@ -89,6 +99,9 @@ class Database:
         pass
     
     def search(self,username):
+        # Function will search for user object with the correct username
+        # When the user object is found the function will return the user object
+        # If the username is not found we print a message to alert this
         found_username = None
         for i in range(len(self.users)):
             if(self.users[i].username == username):
@@ -99,34 +112,45 @@ class Database:
         return found_username
     
     def add_user(self,user):
+        # Functions adds a user to the user array
         self.users.append(user)
     
     def add_song(self,song):
+        # Functions adds a song to the song array
         self.songs.append(song)
     
     def add_playlist(self,playlist):
+        # Functions adds a playlist to the playlist array
         self.playlist.append(playlist)
     
     def remove_user(self,user):
+        # Functions removes a user from the user array
         self.users.remove(user)
         
     def remove_song(self,song):
+        # Functions removes a song from the song array
         self.songs.remove(song)
     
     def remove_playlist(self,playlist,user):
+        # Functions removes a playlist from the playlist array
         user.delete_playlist(playlist)
         self.playlists.remove(playlist)
 
-    def update_user(self,user):
-        for i in range(len(self.users)):
-            if(self.users[i].username == user.username):
-                self.users[i] = user
-                return True
-            else:
-                print("User not found")
-                return False
+    # def update_user(self,user):
+    #     for i in range(len(self.users)):
+    #         if(self.users[i].username == user.username):
+    #             self.users[i] = user
+    #             return True
+    #         else:
+    #             print("User not found")
+    #             return False
     
     def update_song(self,song):
+        # This function is provides the menu for updating a song
+        # The function will search for the song object that matches the song pattern by name.
+        # The user can update the name, singer, genre, runtime and allows a user to exit the menu.
+        # The user will enter the new name for any of the options that they chose.
+        # The function wil call update_details function on the song object and return the song object
         done = True
         for i in range(len(self.songs)):
             if(self.songs[i].name == song):
@@ -160,6 +184,11 @@ class Database:
         return None
     
     def update_playlist(self,playlist):
+        # This function is responsible for updating the playlist
+        # The user will be given a menu where they can change the name of the playlist, add a new song to the playlist and remove a song from the playlist
+        # The user will enter the name of the song when they are adding a new song
+        # The user will enter a new name when renaming the playlist
+        # the user will select remove song, which triggers the playlist object's remove song function
         done = True
         for i in range(len(self.playlists)):
             if(self.playlists[i].name == playlist.name):
@@ -215,24 +244,24 @@ class Database:
             print("Playlist not found")
         return found_playlist
     
-    def search_playlist_song(self,song):
-        song = None
-        for i in range(len(self.songs)):
-            if(self.songs[i].name == song):
-                found_song= self.songs[i]
-                return found_song
-        if song == None:
-            print("Song not found")
-            return False
+    # def search_playlist_song(self,song):
+    #     song = None
+    #     for i in range(len(self.songs)):
+    #         if(self.songs[i].name == song):
+    #             found_song= self.songs[i]
+    #             return found_song
+    #     if song == None:
+    #         print("Song not found")
+    #         return False
         
                     
-    def remove_song_from_playlist(self,playlist,song):
-        for i in range(len(self.users)):
-            if(self.users[i].username == playlist.creator):
-                for j in range(len(self.users[i].playlists)):
-                    if(self.users[i].playlists[j].name == playlist.name):
-                        self.users[i].playlists[j].songs.remove(song)
-                        return True 
+    # def remove_song_from_playlist(self,playlist,song):
+    #     for i in range(len(self.users)):
+    #         if(self.users[i].username == playlist.creator):
+    #             for j in range(len(self.users[i].playlists)):
+    #                 if(self.users[i].playlists[j].name == playlist.name):
+    #                     self.users[i].playlists[j].songs.remove(song)
+    #                     return True 
     
     def identify_global_duplicates(self,user):
         # Fucntion will check for the duplicated songs in the passed in playlist object
@@ -249,10 +278,13 @@ class Database:
             
     
     
-    def sort_playlists_by_name(self):
-        pass
+   
     
     def select_playlist(self,user):
+        # This function allows users to select any playlist that they have created
+        # This function will print out a list in a readable fashion
+        # Users will input the number that correlates to the playlist they want.
+        # Function returns a playlist object which is returned from the function search_playlists()
         print("Select a playlist: ")
         for i in range(len(user.playlists)):
             print(i+1,user.playlists[i])
@@ -261,6 +293,10 @@ class Database:
         return self.search_playlists(playlist)
     
     def select_song(self,playlist):
+        # This function allows users to select any song in the passed in playlist 
+        # This function will print out a list in a readable fashion
+        # Users will input the number that correlates to the song they want.
+        # Function returns a song object.
         print("Select a song: ")
         for i in range(len(playlist.songs)):
             print(i+1,playlist.songs[i])
@@ -269,6 +305,8 @@ class Database:
         return song
     
     def return_playlist_by_name(self,playlist_name):
+        # This function will return a playlist object
+        # Searching through the entire playlist array, if a playlist object's name matches the passed in string, we return the object else we print a not found message
         for i in range(len(self.playlists)):
             if(self.playlists[i].name == playlist_name):
                 return self.playlists[i]

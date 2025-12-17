@@ -1,23 +1,33 @@
 import random
 
 class Playlist:
+    # This is the Playlist class. It is responsible for creating a playlist object
+    # A playlist object has a name, a creator, a list of songs and a total runtime
     from Song import Song
     name = ""
     songs = [Song]
     creator = any
     total_runtime = 0
     def __init__(self,name,creator:any,songs:any,total_runtime=0):
+        # The constructor for the Playlist class
+        # It takes in the name, creator, songs and total runtime of the playlist
         self.name = name
         self.creator = creator
         self.songs = songs
         self.total_runtime = total_runtime
         
     def add_song(self,song):
+        # This function adds a song to the playlist
+        # It takes in the name of the song to be added
         self.songs.append(song)
         print(song,"added to playlist")
         
         
     def remove_song(self):
+        # This function removes a song from the playlist
+        # It asks the user for the name of the song to be removed
+        # If the song is found, it is removed and the function returns True
+        # If the song is not found, an error message is displayed and the function returns False
         self.print_songs()
         song = input("Enter song name: ")
         if(song not in self.songs):
@@ -30,6 +40,7 @@ class Playlist:
         
     
     def sort_songs(self):
+        # This function sorts the songs in the playlist in alphabetical order
         for i in range(len(self.songs)):
             for j in range(len(self.songs)):
                 if(self.songs[i] < self.songs[j]):
@@ -39,10 +50,14 @@ class Playlist:
         self.print_songs()
         
     def shuffle_songs(self):
+        # This function shuffles the songs in the playlist
         random.shuffle(self.songs)
         self.print_songs()
     
     def find_duplicates(self,playlist):
+        # This function checks for duplicate songs between two playlists
+        # It takes in another playlist object and compares the songs in the two playlists
+        # It returns True if a duplicate is found and False if not
        for i in range(len(self.songs)):
            for j in range(len(playlist.songs)):
                if(self.songs[i] == playlist.songs[j]):
@@ -52,32 +67,41 @@ class Playlist:
        return False
     
     def rename_playlist(self,new_name):
+        # This function renames the playlist
+        # It takes in the new name for the playlist
         self.name = new_name
         print("Playlist renamed successfully")
   
         
     def calculate_runtime(self):
+        # This function calculates the total runtime of the playlist
+        self.total_runtime = 0
         for song in self.songs:
             self.total_runtime += song.runtime
         
     def print_songs(self):
+        # This function prints the songs in the playlist
         for song in self.songs:
             print(song)
             
     def get_number_of_songs(self):
+        # This function returns the number of songs in the playlist
         count = 0
         for song in self.songs:
             count += 1
         return count
     
     def get_songs(self):
+        # This function returns the list of songs in the playlist
         return self.songs
         
     def display_playlist(self):
+        # This function displays the details of the playlist
         print("Name of Playlist: ",self.name, "Songs: ",self.print_songs(), "Total Runtime: ",self.total_runtime)
         
     def export_to_text_file(self,filename):
-        # T
+        # This function exports the playlist to a text file
+        # It takes in the name of the file to be created
         with open(filename,"a") as file:
             file.write("PlaylistName: "+self.name+"\n")
             file.write("Songs: ")
