@@ -314,6 +314,9 @@ class Database:
         return None
     
     def run_menu(self,user):
+        # This function is responsible for running the main menu of the application
+        # The user will be able to select from a list of options
+        # The user object is passed in as a parameter
         if(user != None):
             print("Welcome",user.name)
             print("Select an option: \n")
@@ -330,19 +333,23 @@ class Database:
             print("11. Exit")
             match input():
                 case "1":
+                    # This case is for adding a song to a playlist
                     playlist = self.select_playlist(user)
                     song_name = input("Enter song name: ")
                     self.add_song_to_playlist(playlist,song_name)
                     print(song_name,"added to",playlist.name,"successfully")
                 case "2":
+                    # This case is for changing the details of a song in a playlist
                     playlist = self.select_playlist(user)
                     song = self.select_song(playlist)
                     updated_song = self.update_song(song)
                     print(updated_song.disiplay_song(),"Updated Successfully")
                 case "3":
+                    # This case is for renaming a playlist
                     playlist = self.select_playlist(user)
                     self.update_playlist(playlist)
                 case "4":
+                    # This case is for removing a playlist
                     done = True
                     while(done == True):
                         playlist = self.select_playlist(user)
@@ -356,25 +363,31 @@ class Database:
                             print("Invalid input")
                             done = False
                 case "5":
+                    # This case is for removing a song from a playlist
                     playlist = self.select_playlist(user)
                     self.update_playlist(playlist)
                        
                 case "6":
+                    # This case is for identifying duplicated songs in playlists
                     self.identify_global_duplicates(user)
                     user_input = input("Are you done (y/n): ")
                         
                 case "7":
+                    # This case is for sorting the user's playlists by name
                     user.sort_user_plylists()
                     print("Playlists sorted successfully")
                 case "8":
+                    # This case is for sorting the songs in a playlist by name
                     playlist = self.select_playlist(self,user)
                     playlist.sort_songs()
                     print("Songs sorted successfully")
                 case "9":
+                    # This case is for shuffling the songs in a playlist
                     playlist = self.select_playlist(self,user)
                     playlist.shuffle_songs()
                     print("Songs shuffled successfully")
                 case "10":
+                    # This case is for exporting a playlist to a text file
                     done = True
                     while done:
                         playlist = self.select_playlist(self,user)
@@ -390,7 +403,9 @@ class Database:
                             print("Invalid input")
                             done = False
                 case "11":
+                    # This case is for exiting the program
                     exit()
                 case _:
+                    # This case is for invalid input
                     print("Invalid input")
                     self.run_menu()
