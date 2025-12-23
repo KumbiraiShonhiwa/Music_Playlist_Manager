@@ -17,7 +17,7 @@ class Database:
     def load_user_data(self):
         # This function is responsible for loading all the user data from the Users.txt file
         # This function will create a new user object and append it to the users array
-        with open("Assignment_2/Users.txt","r") as file:
+        with open("Users.txt","r") as file:
             lines = file.readlines()
             
             for line in lines[1:]:
@@ -41,7 +41,7 @@ class Database:
     def load_song_data(self):
         # This function is responsible for loading all the song data from the Songs.txt file
         # This function will create a new song object and append it to the songs array
-        with open("Assignment_2/Songs.txt","r") as file:
+        with open("Songs.txt","r") as file:
             lines = file.readlines()
             
             for line in lines[1:]:
@@ -58,7 +58,7 @@ class Database:
     def load_playlist_data(self):
         # This function is responsible for loading all the playlist data from the Playlists.txt file
         # This function will create a new playlist object and append it to the playlists array
-        with open("Assignment_2/Playlists.txt","r") as file:
+        with open("Playlists.txt","r") as file:
             lines = file.readlines()
             for line in lines[1:]:
                 data = line.strip().split(",")
@@ -76,9 +76,10 @@ class Database:
         # The user will have 3 attempts to login
         # If the user fails to login after 3 attempts, the program will exit
         # If the user logs in successfully, the user object will be returned
+        import maskpass
         while self.login_attempts < 3:
             username = input("Enter username: ")
-            password = input("Enter password: ")
+            password = maskpass.askpass(mask="*")
             user = self.search(username)
             if user != None:
                 if user.password == password:
@@ -92,7 +93,7 @@ class Database:
                 print("User not found")
                 return False
         print("Too many login attempts. Exiting.")
-        exit()
+        
 
                     
     def export_data(self,filename):
@@ -319,93 +320,94 @@ class Database:
         # The user object is passed in as a parameter
         if(user != None):
             print("Welcome",user.name)
-            print("Select an option: \n")
-            print("1. Add a song to a playlist.")
-            print("2. Change song details for a playlist.")
-            print("3. Rename a playlist.")
-            print("4. Remove a playlist.")
-            print("5. Remove a song from a playlist.")
-            print("6. Identify duplicated songs in playlists.")
-            print("7. Sort playlists by name.")
-            print("8. Sort songs in each playlist by name.")
-            print("9. Shuffle songs in each playlist.")
-            print("10. Export playlists to a text file.")
-            print("11. Exit")
-            match input():
-                case "1":
-                    # This case is for adding a song to a playlist
-                    playlist = self.select_playlist(user)
-                    song_name = input("Enter song name: ")
-                    self.add_song_to_playlist(playlist,song_name)
-                    print(song_name,"added to",playlist.name,"successfully")
-                case "2":
-                    # This case is for changing the details of a song in a playlist
-                    playlist = self.select_playlist(user)
-                    song = self.select_song(playlist)
-                    updated_song = self.update_song(song)
-                    print(updated_song.disiplay_song(),"Updated Successfully")
-                case "3":
-                    # This case is for renaming a playlist
-                    playlist = self.select_playlist(user)
-                    self.update_playlist(playlist)
-                case "4":
-                    # This case is for removing a playlist
-                    done = True
-                    while(done == True):
+            while True:
+                print("Select an option: \n")
+                print("1. Add a song to a playlist.")
+                print("2. Change song details for a playlist.")
+                print("3. Rename a playlist.")
+                print("4. Remove a playlist.")
+                print("5. Remove a song from a playlist.")
+                print("6. Identify duplicated songs in playlists.")
+                print("7. Sort playlists by name.")
+                print("8. Sort songs in each playlist by name.")
+                print("9. Shuffle songs in each playlist.")
+                print("10. Export playlists to a text file.")
+                print("11. Exit")
+                match input():
+                    case "1":
+                        # This case is for adding a song to a playlist
                         playlist = self.select_playlist(user)
-                        self.remove_playlist(playlist,user)
-                        user_input = input("Are you done (y/n): ")
-                        if(user_input == "y"):
-                            done = False
-                        elif(user_input == "n"):
-                            done = True
-                        else:
-                            print("Invalid input")
-                            done = False
-                case "5":
-                    # This case is for removing a song from a playlist
-                    playlist = self.select_playlist(user)
-                    self.update_playlist(playlist)
-                       
-                case "6":
-                    # This case is for identifying duplicated songs in playlists
-                    self.identify_global_duplicates(user)
-                    user_input = input("Are you done (y/n): ")
+                        song_name = input("Enter song name: ")
+                        self.add_song_to_playlist(playlist,song_name)
+                        print(song_name,"added to",playlist.name,"successfully")
+                    case "2":
+                        # This case is for changing the details of a song in a playlist
+                        playlist = self.select_playlist(user)
+                        song = self.select_song(playlist)
+                        updated_song = self.update_song(song)
+                        print(updated_song.disiplay_song(),"Updated Successfully")
+                    case "3":
+                        # This case is for renaming a playlist
+                        playlist = self.select_playlist(user)
+                        self.update_playlist(playlist)
+                    case "4":
+                        # This case is for removing a playlist
+                        done = True
+                        while(done == True):
+                            playlist = self.select_playlist(user)
+                            self.remove_playlist(playlist,user)
+                            user_input = input("Are you done (y/n): ")
+                            if(user_input == "y"):
+                                done = False
+                            elif(user_input == "n"):
+                                done = True
+                            else:
+                                print("Invalid input")
+                                done = False
+                    case "5":
+                        # This case is for removing a song from a playlist
+                        playlist = self.select_playlist(user)
+                        self.update_playlist(playlist)
                         
-                case "7":
-                    # This case is for sorting the user's playlists by name
-                    user.sort_user_plylists()
-                    print("Playlists sorted successfully")
-                case "8":
-                    # This case is for sorting the songs in a playlist by name
-                    playlist = self.select_playlist(self,user)
-                    playlist.sort_songs()
-                    print("Songs sorted successfully")
-                case "9":
-                    # This case is for shuffling the songs in a playlist
-                    playlist = self.select_playlist(self,user)
-                    playlist.shuffle_songs()
-                    print("Songs shuffled successfully")
-                case "10":
-                    # This case is for exporting a playlist to a text file
-                    done = True
-                    while done:
-                        playlist = self.select_playlist(self,user)
-                        filename = "Assignment_2/Demo_Playlist.txt"
-                        playlist.export_to_text_file(filename)
-                        print("Playlist exported successfully")
+                    case "6":
+                        # This case is for identifying duplicated songs in playlists
+                        self.identify_global_duplicates(user)
                         user_input = input("Are you done (y/n): ")
-                        if(user_input == "y"):
-                            done = False
-                        elif(user_input == "n"):
-                            done = True
-                        else:
-                            print("Invalid input")
-                            done = False
-                case "11":
-                    # This case is for exiting the program
-                    exit()
-                case _:
-                    # This case is for invalid input
-                    print("Invalid input")
-                    self.run_menu()
+                            
+                    case "7":
+                        # This case is for sorting the user's playlists by name
+                        user.sort_user_plylists()
+                        print("Playlists sorted successfully")
+                    case "8":
+                        # This case is for sorting the songs in a playlist by name
+                        playlist = self.select_playlist(self,user)
+                        playlist.sort_songs()
+                        print("Songs sorted successfully")
+                    case "9":
+                        # This case is for shuffling the songs in a playlist
+                        playlist = self.select_playlist(self,user)
+                        playlist.shuffle_songs()
+                        print("Songs shuffled successfully")
+                    case "10":
+                        # This case is for exporting a playlist to a text file
+                        done = True
+                        while done:
+                            playlist = self.select_playlist(self,user)
+                            filename = "Demo_Playlist.txt"
+                            playlist.export_to_text_file(filename)
+                            print("Playlist exported successfully")
+                            user_input = input("Are you done (y/n): ")
+                            if(user_input == "y"):
+                                done = False
+                            elif(user_input == "n"):
+                                done = True
+                            else:
+                                print("Invalid input")
+                                done = False
+                    case "11":
+                        # This case is for exiting the program
+                        exit()
+                    case _:
+                        # This case is for invalid input
+                        print("Invalid input")
+                        self.run_menu(user)

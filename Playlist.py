@@ -20,7 +20,7 @@ class Playlist:
         # This function adds a song to the playlist
         # It takes in the name of the song to be added
         self.songs.append(song)
-        print(song,"added to playlist")
+        print(song,"added to ",self.name,"successfully")
         
         
     def remove_song(self):
@@ -35,7 +35,7 @@ class Playlist:
             return False
         else:
             self.songs.remove(song)
-            print(song,"removed from playlist")
+            print(song,"removed from",self.name,"successfully")
             return True
         
     
@@ -61,7 +61,7 @@ class Playlist:
        for i in range(len(self.songs)):
            for j in range(len(playlist.songs)):
                if(self.songs[i] == playlist.songs[j]):
-                   print("Duplicate found: ",self.songs[i])
+                   print("Duplicate found: ",self.songs[i],"in",self.name,"and",playlist.name)
                    return True
        print("No duplicates found")
        return False
@@ -70,7 +70,7 @@ class Playlist:
         # This function renames the playlist
         # It takes in the new name for the playlist
         self.name = new_name
-        print("Playlist renamed successfully")
+        print("Playlist renamed to",self.name,"successfully")
   
         
     def calculate_runtime(self):
