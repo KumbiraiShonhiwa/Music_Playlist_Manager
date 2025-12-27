@@ -23,29 +23,40 @@ class Test:
     songs = [song1, song2, song3]
     playlists = [playlist1]
     
-    def test_login_functionality(self):
-        pass
+    def test_authenticate_functionality(self):
+        assert self.user1.login("test_user", "password123") == True
+        assert self.user2.login("test_user2", "password123") == True
+        assert self.user1.login("test_user", "wrong_password") == False
+        assert self.user2.login("wrong_user", "password123") == False
+        
     
     def test_add_song_functionality(self):
-        pass
+        assert self.playlist1.add_song(self.song2.name) == True
+        assert self.playlist1.add_song(self.song1.name) == True
     
     def test_remove_song_functionality(self):
-        pass
+        self.playlist1.display_playlist
+        assert self.playlist1.remove_song(self.song1.name) == True
+        assert self.playlist1.remove_song(self.song2.name) == True
+        assert self.playlist1.remove_song(self.song3.name) == False
+      
     
     def test_sort_songs_functionality(self):
-        pass
-    
-    def test_shuffle_songs_functionality(self):
-        pass
+        self.playlist1.sort_songs_name()     
+        assert self.playlist1.songs[0].name == "Bohemian Rhapsody"
+        assert self.playlist1.songs[1].name == "Stairway to Heaven"
+        
     
     def test_rename_playlist_functionality(self):
-        pass
+        self.playlist1.rename_playlist("Fever Dream")
+        assert self.playlist1.name == "Fever Dream"
+        assert self.playlist1.name != "My Rock Favorites"
+        
     
-    def test_sort_playlists_by_name_functionality(self):
-        pass
     
-    def test_export_data_functionality(self):
-        pass
+        
+    
+    
     
     
     

@@ -38,3 +38,13 @@ class User:
         self.playlists.sort()
         for i in range(len(self.playlists)):
             print(self.playlists[i])
+            
+    def login(self,username,password):
+        # This function logs in the user
+        # It takes in the username and password of the user
+        if(self.username == username and self.password == password):
+            print("Login successful")
+            return True
+        else:
+            print("Login failed")
+            return False

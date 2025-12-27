@@ -3,9 +3,8 @@ import random
 class Playlist:
     # This is the Playlist class. It is responsible for creating a playlist object
     # A playlist object has a name, a creator, a list of songs and a total runtime
-    from Song import Song
     name = ""
-    songs = [Song]
+    songs = []
     creator = any
     total_runtime = 0
     def __init__(self,name,creator:any,songs:any,total_runtime=0):
@@ -21,15 +20,14 @@ class Playlist:
         # It takes in the name of the song to be added
         self.songs.append(song)
         print(song,"added to ",self.name,"successfully")
+        return True
         
         
-    def remove_song(self):
+    def remove_song(self,song):
         # This function removes a song from the playlist
         # It asks the user for the name of the song to be removed
         # If the song is found, it is removed and the function returns True
         # If the song is not found, an error message is displayed and the function returns False
-        self.print_songs()
-        song = input("Enter song name: ")
         if(song not in self.songs):
             print("Song not found")
             return False
@@ -48,6 +46,17 @@ class Playlist:
                     self.songs[i] = self.songs[j]
                     self.songs[j] = temp
         self.print_songs()
+        
+    def sort_songs_name(self):
+        # This function sorts the songs in the playlist in alphabetical order
+        for i in range(len(self.songs)):
+            for j in range(len(self.songs)):
+                if(self.songs[i].name < self.songs[j].name):
+                    temp = self.songs[i]
+                    self.songs[i] = self.songs[j]
+                    self.songs[j] = temp
+        self.print_songs()
+        
         
     def shuffle_songs(self):
         # This function shuffles the songs in the playlist
@@ -71,6 +80,7 @@ class Playlist:
         # It takes in the new name for the playlist
         self.name = new_name
         print("Playlist renamed to",self.name,"successfully")
+        
   
         
     def calculate_runtime(self):

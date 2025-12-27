@@ -91,8 +91,12 @@ class Database:
                     continue
             else:
                 print("User not found")
-                return False
+                return None
         print("Too many login attempts. Exiting.")
+        
+    def login(self,username,password):
+        # This function is responsible for logging in the user
+        pass
         
 
                     
@@ -211,7 +215,9 @@ class Database:
                             song = input("Enter new song name: ")
                             self.playlists[i].add_song(song)
                         case "3":
-                            self.playlists[i].remove_song()
+                            self.playlists[i].print_songs()
+                            song = input("Enter song name: ")
+                            self.playlists[i].remove_song(song)
                         case "4":
                             done = False
                         case _:
@@ -380,19 +386,19 @@ class Database:
                         print("Playlists sorted successfully")
                     case "8":
                         # This case is for sorting the songs in a playlist by name
-                        playlist = self.select_playlist(self,user)
+                        playlist = self.select_playlist(user)
                         playlist.sort_songs()
                         print("Songs sorted successfully")
                     case "9":
                         # This case is for shuffling the songs in a playlist
-                        playlist = self.select_playlist(self,user)
+                        playlist = self.select_playlist(user)
                         playlist.shuffle_songs()
                         print("Songs shuffled successfully")
                     case "10":
                         # This case is for exporting a playlist to a text file
                         done = True
                         while done:
-                            playlist = self.select_playlist(self,user)
+                            playlist = self.select_playlist(user)
                             filename = "Demo_Playlist.txt"
                             playlist.export_to_text_file(filename)
                             print("Playlist exported successfully")
