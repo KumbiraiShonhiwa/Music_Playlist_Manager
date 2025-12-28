@@ -10,65 +10,106 @@ class Database:
     login_attempts = 0
     
     def __init__(self):
-        self.songs = []
+        # self.songs = []
         self.users = []
-        self.playlist = []
+        # self.playlist = []
 
-    def load_user_data(self):
-        # This function is responsible for loading all the user data from the Users.txt file
-        # This function will create a new user object and append it to the users array
-        with open("Users.txt","r") as file:
-            lines = file.readlines()
+    def load_test_data(self, file_path="test_data.json"):
+        import json
+
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+
+        for user_data in data:
+            playlists = []
+
+            for playlist_data in user_data.get("playlists", []):
+                songs = []
+
+                for song_data in playlist_data.get("songs", []):
+                    song = Song(
+                        song_data["name"],
+                        song_data["genre"],
+                        song_data["singer"],
+                        song_data["runtime"]
+                    )
+                    songs.append(song)
+
+                playlist = Playlist(
+                    playlist_data["name"],
+                    playlist_data["creator_name"],
+                    songs
+                )
+                playlists.append(playlist)
+
+            user = User(
+                user_data["username"],
+                user_data["password"],
+                user_data["name"],
+                playlists
+            )
+
+            self.users.append(user)
+
+            print(f"Loaded user: {user.username}")
+
+        
+
+    # def load_user_data(self, file_path="Users.txt"):
+    #     # This function is responsible for loading all the user data from the Users.txt file
+    #     # This function will create a new user object and append it to the users array
+    #     with open(file_path,"r") as file:
+    #         lines = file.readlines()
             
-            for line in lines[1:]:
-                data = line.strip().split(",")
-                username = data[0]
-                password = data[1]
-                name = data[2]
+    #         for line in lines[1:]:
+    #             data = line.strip().split(",")
+    #             username = data[0]
+    #             password = data[1]
+    #             name = data[2]
                 
-                playlist_string = data[3]
+    #             playlist_string = data[3]
                 
-                if playlist_string:
-                    playlist_data = playlist_string.split("|")
-                else:
-                    playlist_data = []
+    #             if playlist_string:
+    #                 playlist_data = playlist_string.split("|")
+    #             else:
+    #                 playlist_data = []
                 
-                user = User(username,password,name,playlist_data)
-                self.users.append(user)
+    #             user = User(username,password,name,playlist_data)
+    #             self.users.append(user)
                 
                 
     
-    def load_song_data(self):
-        # This function is responsible for loading all the song data from the Songs.txt file
-        # This function will create a new song object and append it to the songs array
-        with open("Songs.txt","r") as file:
-            lines = file.readlines()
+    # def load_song_data(self, file_path="Songs.txt"):
+    #     # This function is responsible for loading all the song data from the Songs.txt file
+    #     # This function will create a new song object and append it to the songs array
+    #     with open(file_path,"r") as file:
+    #         lines = file.readlines()
             
-            for line in lines[1:]:
-                data = line.strip().split(",")
-                name = data[0]
-                genre = data[1]
-                singer = data[2]
-                runtime = data[3]
+    #         for line in lines[1:]:
+    #             data = line.strip().split(",")
+    #             name = data[0]
+    #             genre = data[1]
+    #             singer = data[2]
+    #             runtime = data[3]
                 
-                song = Song(name,genre,singer,runtime)
-                self.songs.append(song)
+    #             song = Song(name,genre,singer,runtime)
+    #             self.songs.append(song)
                 
     
-    def load_playlist_data(self):
-        # This function is responsible for loading all the playlist data from the Playlists.txt file
-        # This function will create a new playlist object and append it to the playlists array
-        with open("Playlists.txt","r") as file:
-            lines = file.readlines()
-            for line in lines[1:]:
-                data = line.strip().split(",")
-                name = data[0]
-                songs = data[1].split("|")
-                creator = data[2]
-                total_runtime = data[3]
+    # def load_playlist_data(self, file_path="Playlists.txt"):
+    #     # This function is responsible for loading all the playlist data from the Playlists.txt file
+    #     # This function will create a new playlist object and append it to the playlists array
+    #     with open(file_path,"r") as file:
+    #         lines = file.readlines()
+    #         for line in lines[1:]:
+    #             data = line.strip().split(",")
+    #             name = data[0]
+    #             songs = data[1].split("|")
+    #             creator = data[2]
+    #             total_runtime = data[3]
                 
-                playlist = Playlist(name,songs=songs,creator=creator,total_runtime=total_runtime)
-                self.playlists.append(playlist) 
+    #             playlist = Playlist(name,songs=songs,creator=creator,total_runtime=total_runtime)
+    #             self.playlists.append(playlist) 
     
     
     def authenticate(self):
@@ -152,18 +193,15 @@ class Database:
     
     def update_song(self,song):
         # This function is provides the menu for updating a song
-        # The function will search for the song object that matches the song pattern by name.
         # The user can update the name, singer, genre, runtime and allows a user to exit the menu.
         # The user will enter the new name for any of the options that they chose.
         # The function wil call update_details function on the song object and return the song object
+        name = song.name
+        singer = song.singer
+        genre = song.genre
+        runtime = song.runtime
         done = True
-        for i in range(len(self.songs)):
-            if(self.songs[i].name == song):
-                name = self.songs[i].name
-                singer = self.songs[i].singer
-                genre = self.songs[i].genre
-                runtime = self.songs[i].runtime
-                while done != False:
+        while done != False:
                     print("Update song details: ")
                     print("1. Name")
                     print("2. Singer")
@@ -183,10 +221,8 @@ class Database:
                             done = False
                         case _:
                             print("Invalid input")
-                self.songs[i].update_details(name,singer,genre,runtime)
-                return self.songs[i]
-        print("Song not found")
-        return None
+        song.update_details(name,singer,genre,runtime)      
+        return song
     
     def update_playlist(self,playlist):
         # This function is responsible for updating the playlist
@@ -229,12 +265,11 @@ class Database:
             
         
     
-    def add_song_to_playlist(self,playlist,song):
+    def add_song_to_playlist(self,playlist,song,singer,genre,runtime):
         # Adds a song to the global playlist array (list)
         # The passed in parameters, self (Database object), playlist object and the name of the song    
         # Call the playlist objects add_song() to add the song name to the list of songs in the playlist
-        playlist = self.search_playlists(playlist.name)
-        playlist.add_song(song)
+        playlist.add_song(song,singer,genre,runtime)
         
     
     def search_playlists(self,playlist):
@@ -282,10 +317,22 @@ class Database:
         for i in range(len(user_playlists)):
             for j in range(len(user_playlists)-1):
                 user_playlists[i].find_duplicates(user_playlists[j+1])
-            
+                
+    def search_for_song_in_playlist(self,playlist,song_name):
+        # This function will search for a song in the passed in playlist object
+        # The passed in song_name is a string for the song name that is being looked for
+        # The function returns playlist.songs[i] where i is the index of the song name that matches the passed in parameter
+        for i in range(len(playlist.songs)):
+            if(playlist.songs[i] == song_name):
+                return playlist.songs[i]
+        print("Song not found")
+        return None
     
-    
-   
+    def update_song_name_in_playlist(self,playlist,song_name,new_name):
+        # This function will update the name of a song in the passed in playlist object
+        playlist_song_name = self.search_for_song_in_playlist(playlist,song_name)
+        playlist_song_name = new_name
+        return playlist_song_name
     
     def select_playlist(self,user):
         # This function allows users to select any playlist that they have created
@@ -294,10 +341,10 @@ class Database:
         # Function returns a playlist object which is returned from the function search_playlists()
         print("Select a playlist: ")
         for i in range(len(user.playlists)):
-            print(i+1,user.playlists[i])
+            print(i+1,user.playlists[i].name)
         playlist_number = int(input())
         playlist = user.playlists[playlist_number-1]
-        return self.search_playlists(playlist)
+        return playlist
     
     def select_song(self,playlist):
         # This function allows users to select any song in the passed in playlist 
@@ -306,7 +353,7 @@ class Database:
         # Function returns a song object.
         print("Select a song: ")
         for i in range(len(playlist.songs)):
-            print(i+1,playlist.songs[i])
+            print(i+1,playlist.songs[i].name)
         song_number = int(input())
         song = playlist.songs[song_number-1]
         return song
@@ -344,24 +391,36 @@ class Database:
                         # This case is for adding a song to a playlist
                         playlist = self.select_playlist(user)
                         song_name = input("Enter song name: ")
-                        self.add_song_to_playlist(playlist,song_name)
-                        print(song_name,"added to",playlist.name,"successfully")
+                        song_singer_name = input("Enter song singer name: ")
+                        song_genre = input("Enter song genre: ")
+                        song_runtime = input("Enter song runtime: ")
+                        playlist.add_song(song_name,song_singer_name,song_genre,song_runtime)
+                        # self.add_song_to_playlist(playlist,song_name,song_singer_name,song_genre,song_runtime)
+                        
                     case "2":
                         # This case is for changing the details of a song in a playlist
                         playlist = self.select_playlist(user)
                         song = self.select_song(playlist)
-                        updated_song = self.update_song(song)
-                        print(updated_song.disiplay_song(),"Updated Successfully")
+                        if(song == None):
+                            print("Song not found")
+                            continue
+                        self.update_song(song)
                     case "3":
                         # This case is for renaming a playlist
                         playlist = self.select_playlist(user)
-                        self.update_playlist(playlist)
+                        if(playlist == None):
+                            print("Playlist not found")
+                            continue
+                        playlist.rename_playlist(input("Enter new name: "))
                     case "4":
                         # This case is for removing a playlist
                         done = True
                         while(done == True):
                             playlist = self.select_playlist(user)
-                            self.remove_playlist(playlist,user)
+                            if(playlist == None):
+                                print("Playlist not found")
+                                continue
+                            user.delete_playlist(playlist)
                             user_input = input("Are you done (y/n): ")
                             if(user_input == "y"):
                                 done = False
@@ -373,7 +432,11 @@ class Database:
                     case "5":
                         # This case is for removing a song from a playlist
                         playlist = self.select_playlist(user)
-                        self.update_playlist(playlist)
+                        song = self.select_song(playlist)
+                        if(playlist == None or song == None):
+                            print("Playlist or song not found")
+                            continue
+                        playlist.remove_song(song)
                         
                     case "6":
                         # This case is for identifying duplicated songs in playlists
@@ -387,11 +450,17 @@ class Database:
                     case "8":
                         # This case is for sorting the songs in a playlist by name
                         playlist = self.select_playlist(user)
+                        if(playlist == None):
+                            print("Playlist not found")
+                            continue
                         playlist.sort_songs()
                         print("Songs sorted successfully")
                     case "9":
                         # This case is for shuffling the songs in a playlist
                         playlist = self.select_playlist(user)
+                        if(playlist == None):
+                            print("Playlist not found")
+                            continue
                         playlist.shuffle_songs()
                         print("Songs shuffled successfully")
                     case "10":

@@ -1,0 +1,6 @@
+name,genre,singer,runtime
+Bohemian Rhapsody,Rock,Queen,5:55
+Stairway to Heaven,Rock,Led Zeppelin,8:02
+Hotel California,Rock,Eagles,6:30
+Take on Me,Pop,a-ha,3:45
+Billie Jean,Pop,Michael Jackson,4:54

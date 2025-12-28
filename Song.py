@@ -36,5 +36,5 @@ class Song:
     
     def disiplay_song(self):
         # This function displays the details of the song
-        print("Name: ",self.name,"Singer: ",self.singer,"Genre: ",self.genre,"Runtime: ",self.runtime)
+        print("Name: ",self.name,"\nSinger: ",self.singer,"\nGenre: ",self.genre,"\nRuntime: ",self.runtime)
         

@@ -1,0 +1,177 @@
+[
+  {
+    "username": "test_user",
+    "password": "password123",
+    "name": "Test User",
+    "playlists": [
+      {
+        "name": "My Rock Favorites",
+        "creator_name": "test_user",
+        "songs": [
+          {
+            "name": "Bohemian Rhapsody",
+            "genre": "Rock",
+            "singer": "Queen",
+            "runtime": "5:55"
+          },
+          {
+            "name": "Stairway to Heaven",
+            "genre": "Rock",
+            "singer": "Led Zeppelin",
+            "runtime": "8:02"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "username": "test_user2",
+    "password": "password123",
+    "name": "Test User 2",
+    "playlists": [
+      {
+        "name": "80s Pop",
+        "creator_name": "test_user2",
+        "songs": [
+          {
+            "name": "Take on Me",
+            "genre": "Pop",
+            "singer": "a-ha",
+            "runtime": "3:45"
+          },
+          {
+            "name": "Billie Jean",
+            "genre": "Pop",
+            "singer": "Michael Jackson",
+            "runtime": "4:54"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "username": "alicemusic",
+    "password": "pass123",
+    "name": "Alice",
+    "playlists": [
+      {
+        "name": "Rock Classics",
+        "creator_name": "alicemusic",
+        "songs": [
+          {
+            "name": "Like a Rolling Stone",
+            "genre": "Rock",
+            "singer": "Bob Dylan",
+            "runtime": "6:13"
+          }
+        ]
+      },
+      {
+        "name": "Sad Hour",
+        "creator_name": "alicemusic",
+        "songs": [
+          {
+            "name": "Hallelujah",
+            "genre": "Folk",
+            "singer": "Leonard Cohen",
+            "runtime": "4:36"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "username": "bobby_beats",
+    "password": "secure456",
+    "name": "Bob",
+    "playlists": [
+      {
+        "name": "Pop Anthems",
+        "creator_name": "bobby_beats",
+        "songs": [
+          {
+            "name": "Uptown Funk",
+            "genre": "Pop",
+            "singer": "Mark Ronson ft. Bruno Mars",
+            "runtime": "4:30"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "username": "charlie_retro",
+    "password": "90skid",
+    "name": "Charlie",
+    "playlists": [
+      {
+        "name": "90s Rewind",
+        "creator_name": "charlie_retro",
+        "songs": [
+          {
+            "name": "Smells Like Teen Spirit",
+            "genre": "Grunge",
+            "singer": "Nirvana",
+            "runtime": "5:01"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "username": "driver_dave",
+    "password": "vroom789",
+    "name": "Dave",
+    "playlists": [
+      {
+        "name": "Driving Tunes",
+        "creator_name": "driver_dave",
+        "songs": [
+          {
+            "name": "Don't Stop Me Now",
+            "genre": "Rock",
+            "singer": "Queen",
+            "runtime": "3:29"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "username": "test_admin",
+    "password": "admin",
+    "name": "Tester",
+    "playlists": [
+      {
+        "name": "Duplicate Test",
+        "creator_name": "test_admin",
+        "songs": [
+          {
+            "name": "Bohemian Rhapsody",
+            "genre": "Rock",
+            "singer": "Queen",
+            "runtime": "5:55"
+          },
+          {
+            "name": "Bohemian Rhapsody",
+            "genre": "Rock",
+            "singer": "Queen",
+            "runtime": "5:55"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "username": "empty_user",
+    "password": "newpass",
+    "name": "NewUser",
+    "playlists": []
+  },
+  {
+    "username": "user123",
+    "password": "Givemetheykey123",
+    "name": "User123",
+    "playlists": []
+  }
+]

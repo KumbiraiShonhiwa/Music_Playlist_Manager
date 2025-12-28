@@ -1,0 +1,3 @@
+username,password,name,playlists
+test_user,password123,Test User,My Rock Favorites
+test_user2,password123,Test User2,My Rock Favorites

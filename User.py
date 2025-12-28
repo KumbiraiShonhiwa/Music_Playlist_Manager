@@ -25,7 +25,7 @@ class User:
     def delete_playlist(self,playlist):
         # This function deletes a playlist from the user's list of playlists
         # It takes in the playlist object to be deleted
-        self.playlists.remove(playlist.name) 
+        self.playlists.remove(playlist) 
         print(playlist.name,"deleted successfully")
         
     def get_playlist(self):
@@ -35,9 +35,19 @@ class User:
         
     def sort_user_plylists(self):
         # This function sorts the user's playlists in alphabetical order
-        self.playlists.sort()
+        
         for i in range(len(self.playlists)):
-            print(self.playlists[i])
+            for j in range(len(self.playlists)):
+                if(self.playlists[i].name < self.playlists[j].name):
+                    temp = self.playlists[i]
+                    self.playlists[i] = self.playlists[j]
+                    self.playlists[j] = temp
+        self.print_playlists()
+        
+    def print_playlists(self):
+        # This function prints the user's playlists
+        for playlist in self.playlists:
+            print(playlist.name)
             
     def login(self,username,password):
         # This function logs in the user

@@ -15,11 +15,13 @@ class Playlist:
         self.songs = songs
         self.total_runtime = total_runtime
         
-    def add_song(self,song):
+    def add_song(self,song_name, song_singer, song_genre, song_runtime):
         # This function adds a song to the playlist
         # It takes in the name of the song to be added
+        from Song import Song
+        song = Song(song_name,song_genre,song_singer,song_runtime)
         self.songs.append(song)
-        print(song,"added to ",self.name,"successfully")
+        print(song.name,"added to ",self.name,"successfully")
         return True
         
         
@@ -33,7 +35,7 @@ class Playlist:
             return False
         else:
             self.songs.remove(song)
-            print(song,"removed from",self.name,"successfully")
+            print(song.name,"removed from",self.name,"successfully")
             return True
         
     
@@ -41,7 +43,7 @@ class Playlist:
         # This function sorts the songs in the playlist in alphabetical order
         for i in range(len(self.songs)):
             for j in range(len(self.songs)):
-                if(self.songs[i] < self.songs[j]):
+                if(self.songs[i].name < self.songs[j].name):
                     temp = self.songs[i]
                     self.songs[i] = self.songs[j]
                     self.songs[j] = temp
@@ -92,7 +94,7 @@ class Playlist:
     def print_songs(self):
         # This function prints the songs in the playlist
         for song in self.songs:
-            print(song)
+            print(song.name)
             
     def get_number_of_songs(self):
         # This function returns the number of songs in the playlist
