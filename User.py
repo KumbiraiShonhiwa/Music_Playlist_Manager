@@ -58,3 +58,14 @@ class User:
         else:
             print("Login failed")
             return False
+        
+    def print_duplicate_songs(self):
+        # This function prints the duplicate songs in the user's playlists
+        for playlist in self.playlists:
+            for i in range(len(playlist.songs)):
+                for j in range(len(playlist.songs)):
+                    if(i != j and playlist.songs[i].check_duplicates(playlist.songs[j])):
+                        print("Playlist name:",playlist.name,"Song name:",playlist.songs[i].name)
+                        
+        
+    

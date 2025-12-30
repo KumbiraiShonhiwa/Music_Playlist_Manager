@@ -7,3 +7,12 @@ TotalRuntime: 26:02
 PlaylistName: Sad Hour
 Songs: Rolling in the Deep|Someone Like You|Hallelujah|Wonderwall|CreatorName: Alice
 TotalRuntime: 19:44
+PlaylistName: Sad Hour
+Songs: PlaylistName: Rock Classics
+Songs: Like a Rolling Stone|CreatorName: alicemusic
+PlaylistName: Rock Classics
+Songs: Like a Rolling Stone|CreatorName: alicemusic
+PlaylistName: Sad Hour
+Songs: Hallelujah|CreatorName: alicemusic
+PlaylistName: Rock Classics
+Songs: Like a Rolling Stone|CreatorName: alicemusic

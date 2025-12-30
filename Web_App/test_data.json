@@ -159,6 +159,24 @@
             "runtime": "5:55"
           }
         ]
+      },
+       {
+        "name": "Test",
+        "creator_name": "test_admin",
+        "songs": [
+          {
+            "name": "Bohemian Rhapsody",
+            "genre": "Rock",
+            "singer": "Queen",
+            "runtime": "5:55"
+          },
+          {
+            "name": "Bohemian Rhapsody",
+            "genre": "Rock",
+            "singer": "Queen",
+            "runtime": "5:55"
+          }
+        ]
       }
     ]
   },

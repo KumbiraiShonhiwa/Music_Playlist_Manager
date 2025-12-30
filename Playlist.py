@@ -15,7 +15,7 @@ class Playlist:
         self.songs = songs
         self.total_runtime = total_runtime
         
-    def add_song(self,song_name, song_singer, song_genre, song_runtime):
+    def add_song(self,song_name, song_singer, song_genre, song_runtime="0:00"):
         # This function adds a song to the playlist
         # It takes in the name of the song to be added
         from Song import Song
@@ -71,7 +71,7 @@ class Playlist:
         # It returns True if a duplicate is found and False if not
        for i in range(len(self.songs)):
            for j in range(len(playlist.songs)):
-               if(self.songs[i] == playlist.songs[j]):
+               if(self.songs[i].name == playlist.songs[j].name and playlist.songs[j].singer == self.songs[i].singer and playlist.songs[j].genre == self.songs[i].genre):
                    print("Duplicate found: ",self.songs[i],"in",self.name,"and",playlist.name)
                    return True
        print("No duplicates found")
@@ -118,9 +118,8 @@ class Playlist:
             file.write("PlaylistName: "+self.name+"\n")
             file.write("Songs: ")
             for song in self.songs:
-                file.write(song+"|")
+                file.write(song.name+"|")
             file.write("CreatorName: "+self.creator+"\n")
-            file.write("TotalRuntime: "+self.total_runtime+"\n")
             
         
     
