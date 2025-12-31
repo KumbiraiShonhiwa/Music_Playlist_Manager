@@ -73,7 +73,7 @@ pip install flask
 Run the main program:
 
 ```bash
-python Main.py
+python application.py
 ```
 
 Follow the prompts to manage users, songs, and playlists.
