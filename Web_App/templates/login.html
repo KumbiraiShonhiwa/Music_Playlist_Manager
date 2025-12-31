@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -19,39 +20,39 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .login-container {
             background: white;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
         }
-        
+
         h1 {
             color: #333;
             margin-bottom: 10px;
             text-align: center;
         }
-        
+
         .subtitle {
             color: #666;
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         label {
             display: block;
             margin-bottom: 5px;
             color: #555;
             font-weight: 500;
         }
-        
+
         input {
             width: 100%;
             padding: 12px;
@@ -60,12 +61,12 @@
             font-size: 16px;
             transition: border-color 0.3s;
         }
-        
+
         input:focus {
             outline: none;
             border-color: #667eea;
         }
-        
+
         button {
             width: 100%;
             padding: 12px;
@@ -78,30 +79,30 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        
+
         button:hover {
             transform: translateY(-2px);
         }
-        
+
         .error {
             color: #e74c3c;
             margin-top: 15px;
             text-align: center;
             display: none;
         }
-        
+
         .test-accounts {
             margin-top: 30px;
             padding-top: 20px;
             border-top: 1px solid #e0e0e0;
         }
-        
+
         .test-accounts h3 {
             font-size: 14px;
             color: #666;
             margin-bottom: 10px;
         }
-        
+
         .test-accounts p {
             font-size: 12px;
             color: #888;
@@ -109,27 +110,28 @@
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <h1>🎵 Music Manager</h1>
         <p class="subtitle">Sign in to manage your playlists</p>
-        
+
         <form id="loginForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" required>
             </div>
-            
+
             <button type="submit">Sign In</button>
-            
+
             <div class="error" id="error"></div>
         </form>
-        
+
         <div class="test-accounts">
             <h3>Test Accounts:</h3>
             <p>test_user / password123</p>
@@ -137,15 +139,15 @@
             <p>admin / admin</p>
         </div>
     </div>
-    
+
     <script>
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const error = document.getElementById('error');
-            
+
             try {
                 const response = await fetch('/login', {
                     method: 'POST',
@@ -154,9 +156,9 @@
                     },
                     body: JSON.stringify({ username, password })
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (data.success) {
                     window.location.href = '/dashboard';
                 } else {
@@ -170,4 +172,5 @@
         });
     </script>
 </body>
+
 </html>
