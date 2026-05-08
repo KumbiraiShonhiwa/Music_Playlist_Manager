@@ -11,27 +11,6 @@ A Python-based music playlist manager that allows users to create, organize, and
 * Optional web interface
 * Includes demo data and testing scripts
 
-## 📁 Project Structure
-
-```text
-.
-├── Application.py
-├── Database.py
-├── Main.py
-├── Playlist.py
-├── Singer.py
-├── Song.py
-├── User.py
-├── Web_App/                 # Web interface (if enabled)
-├── test_data.json
-├── Demo_Playlist.txt
-├── Playlists.txt
-├── Songs.txt
-├── Users.txt
-├── Testing.py
-└── README.md
-```
-
 ## 🧠 Getting Started
 
 ### 🛠 Prerequisites
